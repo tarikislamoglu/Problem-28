@@ -1,5 +1,6 @@
-import { MinusIcon } from '@heroicons/react/24/solid'
-import { useReducer } from 'react'
+import { MinusIcon } from "@heroicons/react/24/solid";
+import { HiMiniPlus, HiMiniArrowPath } from "react-icons/hi2";
+import { useReducer } from "react";
 
 // Aşağıdaki CountUp bileşeni, useReducer kullanarak sayaç (counter) bileşeni oluşturmaktadır.
 // Amacınız useReducer kullanarak tam fonksiyonel bir counter bileşeni oluşturmaktır.
@@ -11,7 +12,7 @@ import { useReducer } from 'react'
 // ✅ Kullanıcının sayacı sıfırlayabileceği bir "Sıfırla" butonu ekleyin.
 // ✅ Eğer sayı 10’un üzerine çıkarsa, artırma butonu devre dışı bırakılsın (disabled).
 
-// Bonus: 
+// Bonus:
 // ✨ Sayaç değeri belirli aralıklara ulaştığında rengini değiştirin:
 //    - count < 0 ise kırmızı (text-red-600), count > 10 ise yeşil (text-green-600).
 // ✨ Artırma/azaltma butonlarına basıldığında hafifçe büyüme efekti ekleyin (scale-110 transition-transform).
@@ -21,28 +22,61 @@ import { useReducer } from 'react'
 // ✨ Kullanıcı Tab tuşuyla navigasyon yaparken butonların daha belirgin hale gelmesini sağlayın (focus-visible:ring-4).
 // ✨ Eğer count === 0 ise, "Sıfırla" butonu devre dışı kalsın ve soluk görünsün (opacity-50 cursor-not-allowed).
 
-
-
 function reducer(count, action) {
-  return count - 1
+  if (action.type === "decrement") {
+    return count - 1;
+  } else if (action.type === "increment") {
+    return count + 1;
+  } else if (action.type === "reset") {
+    return (count = 0);
+  }
 }
 
 export default function CountUp() {
-  const [count, dispatch] = useReducer(reducer, 0)
+  const [count, dispatch] = useReducer(reducer, 0);
 
   return (
-    <div className='text-center p-8'>
-      <h3 className='text-lg font-semibold text-gray-900'>
+    <div className="text-center p-8">
+      <h3
+        className={`text-lg font-semibold text-gray-900 rounded-md ${
+          count <= -10
+            ? "bg-red-500 "
+            : count >= 10
+            ? "bg-green-500"
+            : "bg-blue-500"
+        }`}
+      >
         Şu anki sayı... {count}
       </h3>
-      <div className='mt-6'>
+      <div className="mt-6 space-x-5">
         <button
-          onClick={() => dispatch({ type: 'increment' })}
-          className='inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          onClick={() => dispatch({ type: "decrement" })}
+          className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          <MinusIcon className='-ml-0.5 mr-1.5 h-5 w-5' />1
+          <MinusIcon className="-ml-0.5 mr-1.5 h-5 w-5" />1
+        </button>
+        <button
+          onClick={() => dispatch({ type: "reset" })}
+          className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          <HiMiniArrowPath className="-ml-0.5 mr-1.5 h-5 w-5" />
+          Reset
+        </button>
+        <button
+          onClick={() => dispatch({ type: "increment" })}
+          className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          disabled={count >= 10}
+        >
+          <HiMiniPlus className="-ml-0.5 mr-1.5 h-5 w-5" />1
         </button>
       </div>
+      {count <= -10 ? (
+        <p className="p-2 bg-red-500 mt-5 rounded-md text-white">
+          Değeriniz çok düşük haberirniz olsun{" "}
+        </p>
+      ) : (
+        ""
+      )}
     </div>
-  )
+  );
 }
