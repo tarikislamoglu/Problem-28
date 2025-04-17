@@ -2,13 +2,6 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { HiMiniPlus, HiMiniArrowPath } from "react-icons/hi2";
 import { useReducer } from "react";
 
-// ✨ Artırma/azaltma butonlarına basıldığında hafifçe büyüme efekti ekleyin (scale-110 transition-transform).
-// ✨ Butonlar tıklanınca 200ms boyunca shadow-lg ile hafif bir gölge efekti kazansın.
-// ✨ Sayaç belirli bir değere ulaştığında (örn: 5), animasyonlu bir kutlama efekti ekleyin (animate-pulse).
-// ✨ group özelliğini kullanarak butona hover yapıldığında ebeveyn div’in de hafifçe renk değiştirmesini sağlayın.
-// ✨ Kullanıcı Tab tuşuyla navigasyon yaparken butonların daha belirgin hale gelmesini sağlayın (focus-visible:ring-4).
-// ✨ Eğer count === 0 ise, "Sıfırla" butonu devre dışı kalsın ve soluk görünsün (opacity-50 cursor-not-allowed).
-
 function reducer(count, action) {
   if (action.type === "decrement") {
     return count - 1;
@@ -90,3 +83,9 @@ export default function CountUp() {
 // Bonus:
 // ✨ Sayaç değeri belirli aralıklara ulaştığında rengini değiştirin:
 //    - count < 0 ise kırmızı (text-red-600), count > 10 ise yeşil (text-green-600).
+// ✨ Artırma/azaltma butonlarına basıldığında hafifçe büyüme efekti ekleyin (scale-110 transition-transform).
+// ✨ Butonlar tıklanınca 200ms boyunca shadow-lg ile hafif bir gölge efekti kazansın.
+// ✨ Sayaç belirli bir değere ulaştığında (örn: 5), animasyonlu bir kutlama efekti ekleyin (animate-pulse).
+// ✨ group özelliğini kullanarak butona hover yapıldığında ebeveyn div’in de hafifçe renk değiştirmesini sağlayın.
+// ✨ Kullanıcı Tab tuşuyla navigasyon yaparken butonların daha belirgin hale gelmesini sağlayın (focus-visible:ring-4).
+// ✨ Eğer count === 0 ise, "Sıfırla" butonu devre dışı kalsın ve soluk görünsün (opacity-50 cursor-not-allowed).
